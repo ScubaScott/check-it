@@ -6,6 +6,7 @@ var KPbtn_1 = "kitchen_sink";
 var scene1 = "kitchen_sink";
 var node = new Array();
 
+//node.push({name: "basement_back", value: 60}); 
 node.push({name: "kitchen_sink1"}); 
 node.push({name: "kitchen_sink2"}); 
 

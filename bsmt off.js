@@ -1,32 +1,16 @@
 // turn off / on an array of nodes
 
-var Scene_1 = "all_off";
+var Scene_1 = "basement_off";
 var node = new Array();
-node[0] = "kitchen";
-node [1] = "living_room";
-node [2] = "hallway";
-node [3] = "office";
-node [4] = "master_bedroom";
-node [5] = "kids_room_lamp";
-node [6] = "bathroom";
-node [7] = "kids_room_lamp";
-node [8] = "front_door";
-node [9] = "master_lamp";
-node [10] = "back_entry";
-node [11] = "back_garage";
-node [12] = "basement";
-node [13] = "basement_bathroom";
-node [14] = "basement_lamp";
-node [15] = "basement_shower";
-node [16] = "garage_light";
-node [17] = "patio";
-node [18] = "utility_room";
-node [19] = "kitchen_sink";
-node [20] = "basement_storage";
-node [21] = "basement_bedroom";
-node [22] = "back_bar_lights";
-node [23] = "office_fanlinc_21680f_light";
-node [24] = "kids_fanlinc_2167cc_light";
+
+node [0] = "basement";
+node [1] = "basement_bathroom";
+node [2] = "basement_lamp";
+node [3] = "basement_shower";
+node [4] = "utility_room";
+node [5] = "basement_storage"
+node [6] = "basement_bedroom"
+node [7] = "back_bar_lights";
 
 
 
