@@ -1,5 +1,5 @@
 var load = "back_bar_lights"; 
-var dummy = "basement_button_c"; 
+var dummy = "basement_button_b"; 
  
 var definition = {
     triggers : [ {
@@ -34,11 +34,21 @@ function run(context) {
         }
         //something is wrong. the dummy should have updated the load itself. We can't be sure what's going on though, so we'll just leave well enough alone.
         logger.warn("Detected dummy changed, queried load switch but state doesn't match.");
+		logger.warn("Attempting to set KeyPad to device state.");
+		if(context.getNodeValue(load, 'STATUS') > 0){
+			logger.debug("Forcing KeyPad ON");
+			context.sendNodeCommand(dummy, "ON", {level: 100});
+		}else{
+			logger.debug("Forcing KeyPad OFF");
+			context.sendNodeCommand(dummy, "OFF", {level: 0});
+		}
         return 0; 
     case "loadChange": // the case where the user toggled the load in software. we have to control the dummy to follow (because the load switch won't forward the command, even though it controls the dummy)
         //this will also execute if the physical load switch was toggled. in this case the dummy would automatically mirror the state, but running this code shouldn't hurt.
-        context.sendNodeCommand(dummy, (context.checkNodeValue(load, 'STATUS', 0) ? 'OFF' : 'ON'), {level: context.getNodeValue(load, 'LEVEL')});
-        logger.debug("Detected load changed, sent command to dummy to match.");
+        var loadStatus = context.checkNodeValue(node_1, 'STATUS', 0) ? 'OFF' : 'ON';
+		var loadLevel = context.getNodeValue(node_1, 'LEVEL');
+		context.sendNodeCommand(dummy, loadStatus, {level: loadLevel});
+        logger.debug("Detected load changed, sent command to dummy to match." + nodeStatus + ":" + nodeLevel);
         return 0;
         break;
     default:

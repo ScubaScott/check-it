@@ -4,17 +4,15 @@ var Scene_1 = "basement_off";
 var node = new Array();
 
 node [0] = "basement";
-node [1] = "basement_bathroom";
-node [2] = "basement_lamp";
-node [3] = "basement_shower";
-node [4] = "utility_room";
+node [1] = "basement_lamp";
+node [2] = "back_bar_lights";
+node [3] = "basement_bedroom"
+node [4] = "av_plug";
 node [5] = "basement_storage"
-node [6] = "basement_bedroom"
-node [7] = "back_bar_lights";
-
-
-
-
+node [6] = "basement_bathroom";
+node [7] = "basement_vanity";
+node [8] = "basement_shower";
+node [9] = "utility_room";
 
 
 var definition = {

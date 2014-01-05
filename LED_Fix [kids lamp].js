@@ -1,6 +1,6 @@
-//This program will listen to different keypad buttons, and 1 physical / virtual node.
 //Keypad Buttons.
 var KPbtn_1 = "kids_room_b";
+//Target Node
 var node_1 = "kids_room_lamp";
 
 var definition = {
@@ -39,10 +39,10 @@ function run(context) {
 		logger.warn("Attempting to set KeyPad to device state.");
 		if(context.getNodeValue(node_1, 'STATUS') > 0){
 			logger.debug("Forcing KeyPad ON");
-			context.sendNodeCommand(KPbtn_1, "ON", {level: 100});
+			context.sendNodeCommand(KPbtn_1, "ON", true);
 		}else{
 			logger.debug("Forcing KeyPad OFF");
-			context.sendNodeCommand(KPbtn_1, "OFF", {level: 0});
+			context.sendNodeCommand(KPbtn_1, "OFF", true);
 		}
 		return 0; 
 	case "node_1Change": // the case where the user toggled the node_1 in software. we have to control the Keypad Button to follow (because the node_1 switch won't forward the command, even though it controls the Keypad Button)
@@ -50,8 +50,8 @@ function run(context) {
 		var nodeStatus = context.checkNodeValue(node_1, 'STATUS', 0) ? 'OFF' : 'ON';
 		var nodeLevel = context.getNodeValue(node_1, 'LEVEL');
 		
-		context.sendNodeCommand(KPbtn_1, (nodeStatus), {level: nodeLevel});
-		logger.debug("Detected node_1 changed, sent command to Keypad Button to match.:" + nodeStatus + ":" + nodeLevel);
+		context.sendNodeCommand(KPbtn_1, nodeStatus, {level: nodeLevel});
+		logger.debug("Detected node_1 changed, sent command to Keypad Button to match." + nodeStatus + ":" + nodeLevel);
 		return 0;
 		break;
 	default:
