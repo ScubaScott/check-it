@@ -1,4 +1,4 @@
-//This program will listen to1 different keypad buttons, and 1 physical / virtual node.
+//This program will listen to different keypad buttons, and 1 physical / virtual node.
 //Keypad Buttons.
 var KPbtn_1 = "kids_room_b";
 var node_1 = "kids_room_lamp";
@@ -36,17 +36,22 @@ function run(context) {
 		}
 		//something is wrong. the Keypad Button should have updated the node_1 itself. let's fix this shit, and not just ignore it.
 		logger.warn("Detected Keypad Button changed, queried node_1 switch but state doesn't match.");
-		logger.warn("attempting to set KP to device state.");
+		logger.warn("Attempting to set KeyPad to device state.");
 		if(context.getNodeValue(node_1, 'STATUS') > 0){
-			context.sendNodeCommand(KPbtn_1, 1);
+			logger.debug("Forcing KeyPad ON");
+			context.sendNodeCommand(KPbtn_1, "ON", {level: 100});
 		}else{
-			context.sendNodeCommand(KPbtn_1, 0);
+			logger.debug("Forcing KeyPad OFF");
+			context.sendNodeCommand(KPbtn_1, "OFF", {level: 0});
 		}
 		return 0; 
 	case "node_1Change": // the case where the user toggled the node_1 in software. we have to control the Keypad Button to follow (because the node_1 switch won't forward the command, even though it controls the Keypad Button)
 		//this will also execute if the physical node_1 switch was toggled. in this case the Keypad Button would automatically mirror the state, but running this code shouldn't hurt.
-		context.sendNodeCommand(KPbtn_1, (context.checkNodeValue(node_1, 'STATUS', 0) ? 'OFF' : 'ON'), {level: context.getNodeValue(node_1, 'LEVEL')});
-		logger.debug("Detected node_1 changed, sent command to Keypad Button to match.");
+		var nodeStatus = context.checkNodeValue(node_1, 'STATUS', 0) ? 'OFF' : 'ON';
+		var nodeLevel = context.getNodeValue(node_1, 'LEVEL');
+		
+		context.sendNodeCommand(KPbtn_1, (nodeStatus), {level: nodeLevel});
+		logger.debug("Detected node_1 changed, sent command to Keypad Button to match.:" + nodeStatus + ":" + nodeLevel);
 		return 0;
 		break;
 	default:
