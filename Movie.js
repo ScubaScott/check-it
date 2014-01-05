@@ -37,10 +37,8 @@ function run(context) {
     switch (eventName) {
     
     case "Scene.1":
-		logger.info("shut off all basement lights");
-		context.sendNodeCommand("bsmt_off", "ON", true);
-		context.sleep(5000); // let's wait for the switch to do it's thing first 
-		
+		logger.info("Movie Time!");
+				
     	for (var i=0;i<node.length;i++) {
        		if(!node[i].value){ node[i].value="100"; }
 			logger.debug("node["+node[i].name+"] Level : "+node[i].value); 
