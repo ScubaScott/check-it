@@ -34,10 +34,14 @@ function run(context) {
 			logger.debug("Detected Keypad Button changed, node_1 status queried. They match. All good!");
 			return 0; //we're happy!
 		}
-		//something is wrong. the Keypad Button should have updated the node_1 itself. We can't be sure what's going on though, so we'll just leave well enough alone.
+		//something is wrong. the Keypad Button should have updated the node_1 itself. let's fix this shit, and not just ignore it.
 		logger.warn("Detected Keypad Button changed, queried node_1 switch but state doesn't match.");
 		logger.warn("attempting to set KP to device state.");
-		context.sendNodeCommand(KPbtn_1, context.checkNodeValue(node_1, 'STATUS', 0), {level: context.getNodeValue(node_1, 'LEVEL')});
+		if(context.getNodeValue(node_1, 'STATUS') > 0){
+			context.sendNodeCommand(KPbtn_1, 1);
+		}else{
+			context.sendNodeCommand(KPbtn_1, 0);
+		}
 		return 0; 
 	case "node_1Change": // the case where the user toggled the node_1 in software. we have to control the Keypad Button to follow (because the node_1 switch won't forward the command, even though it controls the Keypad Button)
 		//this will also execute if the physical node_1 switch was toggled. in this case the Keypad Button would automatically mirror the state, but running this code shouldn't hurt.
