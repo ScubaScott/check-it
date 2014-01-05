@@ -21,16 +21,15 @@ function run(context) {
 	
     switch (eventName) {
     
-    case "KP.Button.ON":
-		logger.info(KPbtn.name + " ON pressed");
-		context.sendNodeCommand(node_on, "ON", true);
-	    break;
-	    
-    case "KP.Button.OFF":
-		logger.info(KPbtn.name + " OFF pressed");
-    	context.sendNodeCommand(node_off, "OFF", true);
-	    break;
-	
+    case "KP.Button":
+		if(context.checkNodeValue(KPbtn_1, 'STATUS', 0)){
+			logger.info(KPbtn_1 + " OFF pressed");
+			context.sendNodeCommand(node_off, "OFF", true);
+		}else{
+			logger.info(KPbtn_1 + " ON pressed");
+			context.sendNodeCommand(node_on, "ON", true);
+		}
+		break;
     default:
         logger.info("Unknown event [" + eventName + "].  Cannot execute.");
     }
