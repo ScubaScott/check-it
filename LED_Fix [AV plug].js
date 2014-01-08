@@ -1,12 +1,12 @@
 
 //Keypad Buttons.
-var KPbtn_1 = "basement_button_a"; 
+var KPbtn_1 = "basement_button_a";
 //Target Node
-var node_1 = "av_plug"; 
- 
- 
- 
- 
+var node_1 = "av_plug";
+
+
+
+
 var definition = {
 	triggers : [ {
 			triggerType : "EVENT",
@@ -20,13 +20,13 @@ var definition = {
 
 	}]
 };
-  
+
 function run(context) {
 	var eventName = context.eventName;
-		 
+
 
 	switch (eventName) {
-	
+
 
 	case "KPbtn_1Change": //the case where the user physically pressed the Keypad Button switch. we need to update the status of the node_1 switch (it wouldn't have told us it changed)
 		context.sleep(1000); // let's wait for the switch to do it's thing first - insteon gets confused if you talk to it too much.
@@ -53,12 +53,12 @@ function run(context) {
 			logger.debug("Forcing KeyPad OFF");
 			context.sendNodeCommand(KPbtn_1, "OFF", {level: 0});
 		}
-		return 0; 
+		return 0;
 	case "node_1Change": // the case where the user toggled the node_1 in software. we have to control the Keypad Button to follow (because the node_1 switch won't forward the command, even though it controls the Keypad Button)
 		//this will also execute if the physical node_1 switch was toggled. in this case the Keypad Button would automatically mirror the state, but running this code shouldn't hurt.
 		var nodeStatus = context.checkNodeValue(node_1, 'STATUS', 0) ? 'OFF' : 'ON';
 		var nodeLevel = context.getNodeValue(node_1, 'LEVEL');
-		
+
 		context.sendNodeCommand(KPbtn_1, nodeStatus, {level: nodeLevel});
 		logger.debug("Detected node_1 changed, sent command to Keypad Button to match." + nodeStatus + ":" + nodeLevel);
 		return 0;
