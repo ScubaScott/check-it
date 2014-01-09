@@ -40,9 +40,13 @@ function run(context) {
 		logger.info("Movie Time!");
 				
     	for (var i=0;i<node.length;i++) {
-       		if(!node[i].value){ node[i].value="100"; }
-			logger.debug("node["+node[i].name+"] Level : "+node[i].value); 
-        	context.sendNodeCommand(node[i].name, node[i].state, {level: node[i].value});
+       		if(node[i].value){
+       			context.sendNodeCommand(node[i].name, node[i].state, {level: node[i].value});
+       		}else{
+       			context.sendNodeCommand(node[i].name, node[i].state);
+       		}
+        	
+        	logger.debug("node["+node[i].name+"] Level "+node[i].state+": "+node[i].value);
 	}
 	    break;
 	    
