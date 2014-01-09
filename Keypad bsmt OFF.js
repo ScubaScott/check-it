@@ -1,4 +1,3 @@
-
 //Keypad Buttons.
 var KPbtn_1 = "basement_slave";
 //Target Node
@@ -24,10 +23,10 @@ function run(context) {
     case "KP.Button":
 		if(context.checkNodeValue(KPbtn_1, 'STATUS', 0)){
 			logger.info(KPbtn_1 + " OFF pressed");
-			context.sendNodeCommand(node_off, "OFF", true);
+			context.sendNodeCommand(node_off, "OFF");
 		}else{
 			logger.info(KPbtn_1 + " ON pressed");
-			context.sendNodeCommand(node_on, "ON", true);
+			context.sendNodeCommand(node_on, "ON");
 		}
 		break;
     default:
