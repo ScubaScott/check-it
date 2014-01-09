@@ -38,6 +38,7 @@ function run(context) {
 	logger.info("Triggering All Off");
     	for (var i=0;i<node.length;i++) {
 			context.sendNodeCommand(node[i], "OFF", true);
+			logger.info("All Off-"+node[i]);
 		}
 	    break;
 	
