@@ -34,14 +34,6 @@ function run(context) {
 	
     switch (eventName) {
     
-    case "Scene.1.ON":
-	logger.info("here");
-
-    	for (var i=0;i<node.length;i++) {
-			context.sendNodeCommand(node[i], "ON", true);
-		}
-	    break;
-	    
     case "Scene.1.OFF":
 	logger.info("Triggering All Off");
     	for (var i=0;i<node.length;i++) {
