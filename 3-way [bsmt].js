@@ -16,10 +16,14 @@ function run(context) {
          
     switch (eventName) {
     
-    case "loadChange": // the case where the user toggled the load in software. we have to control the dummy to follow (because the load switch won't forward the command, even though it controls the dummy)
-        //this will also execute if the physical load switch was toggled. in this case the dummy would automatically mirror the state, but running this code shouldn't hurt.
-        context.sendNodeCommand(dummy, 'ON', true);
-        logger.debug("Detected load changed, sent command to dummy to match.");
+    case "loadChange": 
+		//if load is on, turn slave on, else leave slave alone.
+		if (!context.checkNodeValue(load, 'STATUS', 0)){
+			context.sendNodeCommand(dummy, 'ON', true);
+			logger.info("Detected load changed, sent command to dummy to match.");
+		}else{
+			logger.debug("switch was off, leaving slave alone");
+		}
         return 0;
         break;
     default:

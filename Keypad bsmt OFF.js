@@ -21,6 +21,7 @@ function run(context) {
     switch (eventName) {
     
     case "KP.Button":
+		context.sleep(1000); // let's wait for the switch to do it's thing first
 		if(context.checkNodeValue(KPbtn_1, 'STATUS', 0)){
 			logger.info(KPbtn_1 + " OFF pressed");
 			context.sendNodeCommand(node_off, "OFF");

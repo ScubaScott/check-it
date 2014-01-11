@@ -35,10 +35,11 @@ function run(context) {
     switch (eventName) {
     
     case "Scene.1.OFF":
-	logger.info("Triggering All Off");
+		logger.info("Triggering Basement Off");
+		
     	for (var i=0;i<node.length;i++) {
 			context.sendNodeCommand(node[i], "OFF", true);
-			logger.info("All Off-"+node[i]);
+			logger.info("basement Off-"+node[i]);
 		}
 	    break;
 	

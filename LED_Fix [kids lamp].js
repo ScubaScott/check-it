@@ -30,12 +30,14 @@ function run(context) {
 			logger.error("Detected Keypad Button changed, but couldn't query node_1 switch.");
 			return -1;
 		}
-		if(context.getNodeValue(node_1, 'STATUS') == context.getNodeValue(KPbtn_1, 'STATUS')){
+		var KPbtn_status = context.getNodeValue(KPbtn_1, 'STATUS');
+		var node_status = context.getNodeValue(node_1, 'STATUS');
+		if(KPbtn_Status == node_status){
 			logger.debug("Detected Keypad Button changed, node_1 status queried. They match. All good!");
 			return 0; //we're happy!
 		}
 		//something is wrong. the Keypad Button should have updated the node_1 itself. let's fix this shit, and not just ignore it.
-		logger.warn("Detected Keypad Button changed, queried node_1 switch but state doesn't match.");
+		logger.warn("Detected Keypad Button changed, Keypad is:"+KPbtn_status+" Node is:"+node_status);
 		logger.warn("Attempting to set KeyPad to device state.");
 		if(context.getNodeValue(node_1, 'STATUS') > 0){
 			logger.debug("Forcing KeyPad ON");

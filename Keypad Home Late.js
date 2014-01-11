@@ -25,13 +25,7 @@ var definition = {
 
 function run(context) {
     var eventName = context.eventName;
-	//var state = (context.value == 0) ? "OFF" : "ON";
-	//var currentState = context.getAttribute( 'currentState', 'PROGRAM' )
-	//logger.debug(node_1+" current State: "+state);
 
-	//if(state == currentState) {
-	//	return; 
-	//}
 
     // Only process when set from button
 	if (context.changeType != "PUSH") {

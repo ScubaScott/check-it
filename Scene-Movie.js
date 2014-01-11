@@ -3,7 +3,7 @@
 var Scene_1 = "movie";
 var node = new Array();
 
-//node.push({name: "node_name", value: 70}); value is dimming level
+//node.push({name: "basement", state: "OFF", value: 0});  value is dimming level
 
 node.push({name: "basement", state: "OFF", value: 0}); 
 node.push({name: "basement_lamp", state: "ON", value: 10}); 
@@ -46,7 +46,7 @@ function run(context) {
        			context.sendNodeCommand(node[i].name, node[i].state);
        		}
         	
-        	logger.debug("node["+node[i].name+"] Level "+node[i].state+": "+node[i].value);
+        	logger.info("node["+node[i].name+"] Level "+node[i].state+": "+node[i].value);
 	}
 	    break;
 	    

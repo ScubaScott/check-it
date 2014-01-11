@@ -38,7 +38,7 @@ function run(context) {
     switch (eventName) {
 	
 	case "KP.Button.1":
-		logger.info("Basement - ALL OFF");
+		logger.info("Basement D- Movie button");
 		context.sendNodeCommand(node_1, "ON", true);
 	    break;
 
