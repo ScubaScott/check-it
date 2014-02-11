@@ -18,6 +18,7 @@ node [12] = "basement";
 node [13] = "basement_bathroom";
 node [14] = "basement_lamp";
 node [15] = "basement_shower";
+node [16] = "basement_slave";
 node [16] = "garage_light";
 node [17] = "patio";
 node [18] = "utility_room";
