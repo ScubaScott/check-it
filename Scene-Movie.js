@@ -20,37 +20,34 @@ node.push({name: "utility_room", state: "OFF", value: 0});
 
 var definition = {
     triggers : [ {
-	        triggerType : "EVENT",
-	        events : [ {
-	            eventName : "Scene.1",
-	            alias : Scene_1,
-	            property : "STATUS",
-		    changedOnly : false
-    		} ]
+            triggerType : "EVENT",
+            events : [ {
+                eventName : "MovieTime",
+                alias : Scene_1,
+                property : "STATUS",
+            changedOnly : false
+            } ]
     } ]
 };
 
 
 function run(context) {
     var eventName = context.eventName;
-	
+    
     switch (eventName) {
     
-    case "Scene.1":
-		logger.info("Movie Time!");
-				
-    	for (var i=0;i<node.length;i++) {
-       		if(node[i].value){
-       			context.sendNodeCommand(node[i].name, node[i].state, {level: node[i].value});
-       		}else{
-       			context.sendNodeCommand(node[i].name, node[i].state);
-       		}
-        	
-        	logger.info("node["+node[i].name+"] Level "+node[i].state+": "+node[i].value);
-	}
-	    break;
-	    
-	
+    case "MovieTime":
+        logger.info("Movie Time!");
+                
+        for (var i=0;i<node.length;i++) 
+        {
+            logger.info("node["+node[i].name+"] Level "+node[i].state+": "+node[i].value);
+            context.sendNodeCommand(node[i].name, node[i].state, {level: node[i].value});
+            context.sleep(500); 
+        }
+        break;
+        
+    
     default:
         logger.info("Unknown event [" + eventName + "].  Cannot execute.");
     }
